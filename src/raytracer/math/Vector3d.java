@@ -24,31 +24,48 @@ public class Vector3d {
         this.z = to.z - from.z;
     }
 
-    public Vector3d normalize() { // makes length of vector 1 with the same direction.
-        return null;
+    public void normalizeSelf() { // makes length of vector 1 with the same direction.
+        double t = x*x + y*y + z*z;
+        if(t != 0 && t != 1) t = (1 / Math.sqrt(t));
+        x *= t;
+        y *= t;
+        z *= t;
+
+    }
+
+    public final Vector3d normalize(){
+        double t = x*x + y*y + z*z;
+        if (t != 0 && t != 1) t = (1 / Math.sqrt(t));
+        return new Vector3d(x*t, y*t, z*t);
     }
 
     public Vector3d add(Vector3d vector) {
         return null;
     }
 
-    public double dotProduct(Vector3d B) {
+    public final double dotProduct(Vector3d B) {
         return (x*B.x + y*B.y + z*B.y);
     }
 
-    public Vector3d crossProduct(Vector3d B) {
+    public final Vector3d crossProduct(Vector3d B) {
         return new Vector3d(y*B.z - z*B.y, z*B.x - x*B.z, x*B.y - y*B.x);
     }
 
-    public Vector3d subtract(Vector3d vector) {
-        return null;
+    //substract vector v1 from v..
+    public Vector3d subtract(Vector3d v1) {
+        Vector3d v2 = new Vector3d(this.x - v1.x, this.y - v1.y, this.z - v1.z);
+        return v2;
     }
 
     public Vector3d scale(double d) {
-        return null;
+        Vector3d v2 = new Vector3d(this.x*d, this.y*d, this.z*d);
+        return v2;
+
+        //this.x*d, this.y*d, this.z*d
+
     }
 
-    public double getLength(Vector3d A) {
-        return Math.sqrt(A.x*A.x + A.y*A.y + A.z*A.z);
+    public final double getLength() {
+        return Math.sqrt(x*x + y*y + z*z);
     }
 }
