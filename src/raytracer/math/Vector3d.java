@@ -36,8 +36,8 @@ public class Vector3d {
         return (x*B.x + y*B.y + z*B.y);
     }
 
-    public Vector3d crossProduct(Vector3d vector) {
-        return null;
+    public Vector3d crossProduct(Vector3d B) {
+        return new Vector3d(y*B.z - z*B.y, z*B.x - x*B.z, x*B.y - y*B.x);
     }
 
     public Vector3d subtract(Vector3d vector) {
@@ -48,7 +48,7 @@ public class Vector3d {
         return null;
     }
 
-    public double getLength() {
-        return Math.sqrt(x+x + y*y + z*z);
+    public double getLength(Vector3d A) {
+        return Math.sqrt(A.x*A.x + A.y*A.y + A.z*A.z);
     }
 }
