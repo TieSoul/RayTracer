@@ -13,10 +13,10 @@ public class Point3d {
     }
 
     public double getDistance(Point3d point) {
-        return 0;
+        return new Vector3d(this, point).getLength();
     }
 
     public Point3d translate(Vector3d vector) {
-        return null;
+        return new Point3d(x + vector.x, y+vector.y, z+vector.z);
     }
 }
