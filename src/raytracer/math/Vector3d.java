@@ -43,11 +43,11 @@ public class Vector3d {
         return null;
     }
 
-    public final double dotProduct(Vector3d B) {
+    public double dotProduct(Vector3d B) {
         return (x*B.x + y*B.y + z*B.y);
     }
 
-    public final Vector3d crossProduct(Vector3d B) {
+    public Vector3d crossProduct(Vector3d B) {
         return new Vector3d(y*B.z - z*B.y, z*B.x - x*B.z, x*B.y - y*B.x);
     }
 
@@ -65,7 +65,7 @@ public class Vector3d {
 
     }
 
-    public final double getLength() {
+    public double getLength() {
         return Math.sqrt(x*x + y*y + z*z);
     }
 }
