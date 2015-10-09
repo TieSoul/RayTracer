@@ -23,6 +23,7 @@ public class Sphere extends Object3D {
 
     //check if the ray intersects the spere
     @Override
+    //actually needs to return a double
     public IntersectionInfo intersect(Ray ray) {
 
         //Vector3d L = ray.origin.subtract....;
@@ -32,18 +33,38 @@ public class Sphere extends Object3D {
 
         double discriminant = b*b - 4*a*c;
 
+
+        //return -1 when there isnt even an intersection
         if (discriminant < 0)
             return -1;
 
         double discSqrt = Math.sqrt(discriminant);
-        double q;
+        double d;
 
         if (b < 0){
-            q = (-b - discSqrt)/2;
+            d = (-b - discSqrt)/2;
         } else {
-            q = (-b + discSqrt)/2;
+            d = (-b + discSqrt)/2;
         }
-        return null;
+
+        double t1 = d/a;
+        double t2 = c/d;
+
+        if (t1 > t2){
+            double temporary = t0;
+            t1 = t2;
+            t2 = temporary;
+        }
+
+        if (t2 < 0)
+            return -1;
+
+        if (t1 < 0)
+            t = t2;
+        else
+            t = t1;
+
+        return t;
     }
 
 
