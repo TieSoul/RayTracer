@@ -30,7 +30,9 @@ public class IntersectionInfo {
             this.ray = ray;
             this.object = object;
             this.normal = normal.normalize();
-            this.t = new Vector3d(ray.origin, intersection).
+            //?
+            this.t = new Vector3d(ray.origin, intersection).getLength();
+            //
             this.point = ray.getEnd(t);
             this.incoming = incoming;
         }
