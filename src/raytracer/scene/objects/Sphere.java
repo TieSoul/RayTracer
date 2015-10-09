@@ -25,46 +25,76 @@ public class Sphere extends Object3D {
     @Override
     //actually needs to return a double
     public IntersectionInfo intersect(Ray ray) {
+        //method missing
 
-        //Vector3d L = ray.origin.subtract....;
-        double a = ray.direction.dotProduct(ray.direction);
-        double b = 2*(ray.direction.dotProduct(L));
-        double c = (L.dotProduct(L)) - sqrRadius;
+        Point3d p = ray.origin;
+        Vector3d u = ray.direction;
+        Vector3d v = new Vector3d(center, p);
+        double t;
+        Vector3d normal;
+        Point3d intersection;
+        boolean incoming;
 
-        double discriminant = b*b - 4*a*c;
+        //double a = ray.direction.dotProduct(ray.direction);
+        double b = 2*(v.dotProduct(u));
+        double c = v.dotProduct(v) - sqrRadius;
+        double discriminant = b*b - 4*c;
 
 
         //return -1 when there isnt even an intersection
-        if (discriminant < 0)
-            return -1;
+        if (discriminant < 0) {
+            return null;
+        }
 
         double discSqrt = Math.sqrt(discriminant);
-        double d;
+        double dMin = (-b - discSqrt)/2;
+        double dPlus = (-b + discSqrt)/2;
 
-        if (b < 0){
-            d = (-b - discSqrt)/2;
+        //if sphere is behind the ray
+        if (dMin < 0 && dPlus < 0) {
+            return null;
+        }
+
+        //if origin of the ray is inside the sphere
+        if (dMin < 0 && dPlus > 0){
+            t = dPlus;
+            intersection = ray.getEnd(t);
+            normal = new Vector3d(intersection, center);
+            incoming = false;
+
+
         } else {
-            d = (-b + discSqrt)/2;
+            t = dMin;
+            intersection = ray.getEnd(t);
+            normal = new Vector3d(center, intersection);
+            incoming = true;
         }
 
-        double t1 = d/a;
-        double t2 = c/d;
+        return new IntersectionInfo(ray, this, normal, intersection, incoming);
 
-        if (t1 > t2){
-            double temporary = t0;
-            t1 = t2;
-            t2 = temporary;
-        }
 
-        if (t2 < 0)
-            return -1;
 
-        if (t1 < 0)
-            t = t2;
-        else
-            t = t1;
 
-        return t;
+
+//
+//        double t1 = d/a;
+//        double t2 = c/d;
+//
+//        if (t1 > t2){
+//            double temporary = t0;
+//            t1 = t2;
+//            t2 = temporary;
+//        }
+//
+//        if (t2 < 0)
+//            return -1;
+//
+//        if (t1 < 0)
+//            t = t2;
+//        else
+//            t = t1;
+//
+//        return t;
     }
 
 

@@ -62,8 +62,8 @@ public class Vector3d {
 
     //substract vector v1 from v..
     public Vector3d subtract(Vector3d v1) {
-        Vector3d v2 = new Vector3d(this.x - v1.x, this.y - v1.y, this.z - v1.z);
-        return v2;
+        return new Vector3d(this.x - v1.x, this.y - v1.y, this.z - v1.z);
+        //return v2;
     }
 
     public Vector3d scale(double d) {

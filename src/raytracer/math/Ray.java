@@ -9,4 +9,14 @@ public class Ray {
         this.origin = origin;
         this.direction = direction.normalize();
     }
+
+
+    public Point3d getEnd(double t){
+        return origin.translate(direction.scale(t));
+        // ? origin + (direction vector * t)
+    }
+
+    public Point3d getEnd(){
+        return getEnd(this.t);
+    }
 }
