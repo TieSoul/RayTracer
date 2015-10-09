@@ -2,6 +2,7 @@ package raytracer.scene.objects;
 
 import raytracer.math.Point3d;
 import raytracer.math.Ray;
+import raytracer.math.Vector3d;
 import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
 
@@ -23,24 +24,27 @@ public class Sphere extends Object3D {
     //check if the ray intersects the spere
     @Override
     public IntersectionInfo intersect(Ray ray) {
-        double x = center.x - ray.origin.x;
-        double y = center.y - ray.origin.y;
-        double z = center.z - ray.origin.z;
-        double v = ray.direction.dotProduct(x, y, z);
 
-        //check if the ray intersects
-        double t = sqrRadius + v*v - x*x - y*y - z*z;
-        if (t < 0){
-            //return false;
-        }
-        //check if its the closest intersection
-        if((t > ray.t) || (t < 0)){
-            //return false;
-        }
+        //Vector3d L = ray.origin.subtract....;
+        double a = ray.direction.dotProduct(ray.direction);
+        double b = 2*(ray.direction.dotProduct(L));
+        double c = (L.dotProduct(L)) - sqrRadius;
 
-        ray.t = t;
-        //ray.object = this;
-        //return true;
+        double discriminant = b*b - 4*a*c;
+
+        if (discriminant < 0)
+            return -1;
+
+        double discSqrt = Math.sqrt(discriminant);
+        double q;
+
+        if (b < 0){
+            q = (-b - discSqrt)/2;
+        } else {
+            q = (-b + discSqrt)/2;
+        }
         return null;
     }
+
+
 }
