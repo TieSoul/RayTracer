@@ -29,7 +29,18 @@ public class Sphere extends Object3D {
         double v = ray.direction.dotProduct(x, y, z);
 
         //check if the ray intersects
-        //double t = sqrRadius
+        double t = sqrRadius + v*v - x*x - y*y - z*z;
+        if (t < 0){
+            //return false;
+        }
+        //check if its the closest intersection
+        if((t > ray.t) || (t < 0)){
+            //return false;
+        }
+
+        ray.t = t;
+        //ray.object = this;
+        //return true;
         return null;
     }
 }
