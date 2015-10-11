@@ -18,7 +18,7 @@ public class Sphere extends Object3D {
     public Sphere(Point3d center, double radius) {
         this.center = center;
         this.radius = radius;
-        double sqrRadius = radius * radius;
+        this.sqrRadius = radius * radius;
     }
 
     //check if the ray intersects the spere
