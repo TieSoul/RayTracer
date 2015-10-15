@@ -6,6 +6,8 @@ import raytracer.math.Vector3d;
 import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
 
+import java.awt.*;
+
 /**
  * Created by Thijs on 04/10/2015.
  */
@@ -19,6 +21,14 @@ public class Sphere extends Object3D {
         this.center = center;
         this.radius = radius;
         this.sqrRadius = radius * radius;
+        this.color = Color.WHITE;
+    }
+
+    public Sphere(Point3d center, double radius, Color color) {
+        this.center = center;
+        this.radius = radius;
+        this.sqrRadius = radius * radius;
+        this.color = color;
     }
 
     //check if the ray intersects the spere
@@ -43,7 +53,7 @@ public class Sphere extends Object3D {
 
         //return -1 when there isnt even an intersection
         if (discriminant < 0) {
-            return null;
+            return new IntersectionInfo(ray, this);
         }
 
         double discSqrt = Math.sqrt(discriminant);
@@ -52,7 +62,7 @@ public class Sphere extends Object3D {
 
         //if sphere is behind the ray
         if (dMin < 0 && dPlus < 0) {
-            return null;
+            return new IntersectionInfo(ray, this);
         }
 
         //if origin of the ray is inside the sphere
@@ -61,8 +71,6 @@ public class Sphere extends Object3D {
             intersection = ray.getEnd(t);
             normal = new Vector3d(intersection, center);
             incoming = false;
-
-
         } else {
             t = dMin;
             intersection = ray.getEnd(t);
@@ -71,30 +79,6 @@ public class Sphere extends Object3D {
         }
 
         return new IntersectionInfo(ray, this, normal, intersection, incoming);
-
-
-
-
-
-//
-//        double t1 = d/a;
-//        double t2 = c/d;
-//
-//        if (t1 > t2){
-//            double temporary = t0;
-//            t1 = t2;
-//            t2 = temporary;
-//        }
-//
-//        if (t2 < 0)
-//            return -1;
-//
-//        if (t1 < 0)
-//            t = t2;
-//        else
-//            t = t1;
-//
-//        return t;
     }
 
 
