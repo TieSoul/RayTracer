@@ -16,6 +16,12 @@ public class IntersectionInfo {
     public Point3d point;
     public Ray ray;
     public boolean incoming;
+    
+    public IntersectionInfo(Ray ray, Object3D object) {
+        hit = false;
+        this.ray = ray;
+        this.object = object;
+    }
 
         public IntersectionInfo(Ray ray, Object3D object, Vector3d normal, double t, boolean incoming ){
             this.ray = ray;
