@@ -23,25 +23,25 @@ public class IntersectionInfo {
         this.object = object;
     }
 
-        public IntersectionInfo(Ray ray, Object3D object, Vector3d normal, double t, boolean incoming ){
-            hit = true;
-            this.ray = ray;
-            this.object = object;
-            this.normal = normal.normalize();
-            this.t = t;
-            this.point = ray.getEnd(t);
-            this.incoming = incoming;
-        }
+    public IntersectionInfo(Ray ray, Object3D object, Vector3d normal, double t, boolean incoming ){
+        hit = true;
+        this.ray = ray;
+        this.object = object;
+        this.normal = normal.normalize();
+        this.t = t;
+        this.point = ray.getEnd(t);
+        this.incoming = incoming;
+    }
 
-        public IntersectionInfo(Ray ray, Object3D object, Vector3d normal, Point3d intersection, boolean incoming){
-            hit = true;
-            this.ray = ray;
-            this.object = object;
-            this.normal = normal.normalize();
-            //?
-            this.t = new Vector3d(ray.origin, intersection).getLength();
-            //
-            this.point = ray.getEnd(t);
-            this.incoming = incoming;
-        }
+    public IntersectionInfo(Ray ray, Object3D object, Vector3d normal, Point3d intersection, boolean incoming){
+        hit = true;
+        this.ray = ray;
+        this.object = object;
+        this.normal = normal.normalize();
+        //?
+        this.t = new Vector3d(ray.origin, intersection).getLength();
+        //
+        this.point = ray.getEnd(t);
+        this.incoming = incoming;
+    }
 }
