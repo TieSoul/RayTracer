@@ -24,6 +24,7 @@ public class IntersectionInfo {
     }
 
         public IntersectionInfo(Ray ray, Object3D object, Vector3d normal, double t, boolean incoming ){
+            hit = true;
             this.ray = ray;
             this.object = object;
             this.normal = normal.normalize();
@@ -33,6 +34,7 @@ public class IntersectionInfo {
         }
 
         public IntersectionInfo(Ray ray, Object3D object, Vector3d normal, Point3d intersection, boolean incoming){
+            hit = true;
             this.ray = ray;
             this.object = object;
             this.normal = normal.normalize();
