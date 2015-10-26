@@ -19,4 +19,8 @@ public class Point3d {
     public Point3d translate(Vector3d vector) {
         return new Point3d(x + vector.x, y+vector.y, z+vector.z);
     }
+
+    public String toString() {
+        return "(" + x + ", " + y + ", " + z + ")";
+    }
 }

@@ -9,7 +9,6 @@ import raytracer.math.Vector3d;
  */
 public class IntersectionInfo {
     public boolean hit;
-    public double distance;
     public Object3D object;
     public double t;
     public Vector3d normal;
