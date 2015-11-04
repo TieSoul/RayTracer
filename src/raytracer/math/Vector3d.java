@@ -77,4 +77,8 @@ public class Vector3d {
     public double getLength() {
         return Math.sqrt(x*x + y*y + z*z);
     }
+
+    public String toString() {
+        return "Vector3d: (" + x + ", " + y + ", " + z + ")";
+    }
 }

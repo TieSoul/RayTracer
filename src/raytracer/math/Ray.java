@@ -19,4 +19,8 @@ public class Ray {
     public Point3d getEnd(){
         return getEnd(this.t);
     }
+
+    public String toString() {
+        return "Ray: (" + origin.x + ", " + origin.y + ", " + origin.z + ") + t(" + direction.x + ", " + direction.y + ", " + direction.z + ")";
+    }
 }
