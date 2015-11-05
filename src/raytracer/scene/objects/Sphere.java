@@ -46,12 +46,11 @@ public class Sphere extends Object3D {
         boolean incoming;
 
         //double a = ray.direction.dotProduct(ray.direction);
-        double b = 2*(v.dotProduct(u));
+        double b = 2*v.dotProduct(u);
         double c = v.dotProduct(v) - sqrRadius;
         double discriminant = b*b - 4*c;
 
-
-        //return -1 when there isnt even an intersection
+        //return -1 when there is no intersection
         if (discriminant < 0) {
             return new IntersectionInfo(ray, this);
         }

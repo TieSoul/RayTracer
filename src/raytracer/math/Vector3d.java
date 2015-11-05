@@ -48,7 +48,7 @@ public class Vector3d {
     }
 
     public double dotProduct(Vector3d B) {
-        return (x*B.x + y*B.y + z*B.y);
+        return (x*B.x + y*B.y + z*B.z);
     }
 
     //for the IntersectionInfo

@@ -5,22 +5,12 @@ import raytracer.math.Point3d;
 import raytracer.math.Ray;
 import raytracer.math.Vector3d;
 import raytracer.scene.Camera;
-import raytracer.scene.Scene;
-
-import java.awt.*;
 
 /**
  * Created by Administrator on 4-11-2015.
  */
 public class OrthographicCamera extends Camera {
-    public double pixelSize;
 
-    /**
-     * @param pixelSize the physical width/height of a pixel on the orthographic plane
-     * @param width the width of the plane in pixels
-     * @param height the height of the plane in pixels
-     * @param location the location of the middle of the plane
-     */
     public OrthographicCamera(double pixelSize, int width, int height, Point3d location) {
         this.pixelSize = pixelSize;
         this.width = width;

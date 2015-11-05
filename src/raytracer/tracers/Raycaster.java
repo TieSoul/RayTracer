@@ -18,7 +18,9 @@ public class Raycaster extends Tracer {
         IntersectionInfo min_intersect = new IntersectionInfo(ray, null, null, Double.POSITIVE_INFINITY, false);
         for (Object3D object : scene.objects) {
             IntersectionInfo intersect = object.intersect(ray);
-            if (intersect.hit && intersect.t < min_intersect.t) min_intersect = intersect;
+            if (intersect.hit && intersect.t < min_intersect.t) {
+                min_intersect = intersect;
+            }
         }
         if (min_intersect.t != Double.POSITIVE_INFINITY) return min_intersect.object.color;
         return null;

@@ -11,6 +11,7 @@ import java.awt.*;
  * Created by Thijs on 04/10/2015.
  */
 public abstract class Camera {
+    public double pixelSize;
     public Scene scene;
     public int width;
     public int height;
