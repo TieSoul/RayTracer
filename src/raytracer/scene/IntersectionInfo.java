@@ -26,7 +26,7 @@ public class IntersectionInfo {
         hit = true;
         this.ray = ray;
         this.object = object;
-        this.normal = normal.normalize();
+        if (normal != null) this.normal = normal.normalize();
         this.t = t;
         this.point = ray.getEnd(t);
         this.incoming = incoming;

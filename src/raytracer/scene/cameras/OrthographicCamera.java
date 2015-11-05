@@ -19,10 +19,9 @@ public class OrthographicCamera extends Camera {
      * @param pixelSize the physical width/height of a pixel on the orthographic plane
      * @param width the width of the plane in pixels
      * @param height the height of the plane in pixels
-     * @param location the location of the top left of the plane
+     * @param location the location of the middle of the plane
      */
-    public OrthographicCamera(Scene scene, double pixelSize, int width, int height, Point3d location) {
-        this.scene = scene;
+    public OrthographicCamera(double pixelSize, int width, int height, Point3d location) {
         this.pixelSize = pixelSize;
         this.width = width;
         this.height = height;
@@ -31,8 +30,7 @@ public class OrthographicCamera extends Camera {
 
     @Override
     public Ray mapPoint(Point2d pixel) {
-        Point3d origin = location;
-        origin = origin.translate(new Vector3d(pixel.x*pixelSize, pixel.y * pixelSize, 0));
+        Point3d origin = new Point3d(pixelSize * (pixel.x - 0.5 * (width-1.0)), pixelSize * (pixel.y - 0.5 * (height - 1.0)), 0);
         return new Ray(origin, new Vector3d(0, 0, 1));
     }
 }
