@@ -5,8 +5,10 @@ import raytracer.math.Ray;
 import raytracer.math.Vector3d;
 import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
+import raytracer.scene.Surface;
 
 import java.awt.*;
+import java.util.Vector;
 
 /**
  * Created by Thijs on 04/10/2015.
@@ -16,6 +18,7 @@ public class Sphere extends Object3D {
     public Point3d center;
     public double radius;
     public double sqrRadius;
+    Surface surface;
 
     public Sphere(Point3d center, double radius) {
         this.center = center;
@@ -24,7 +27,8 @@ public class Sphere extends Object3D {
         this.color = Color.WHITE;
     }
 
-    public Sphere(Point3d center, double radius, Color color) {
+    public Sphere(Surface surface, Point3d center, double radius, Color color) {
+        this.surface = surface;
         this.center = center;
         this.radius = radius;
         this.sqrRadius = radius * radius;
@@ -78,6 +82,19 @@ public class Sphere extends Object3D {
         }
 
         return new IntersectionInfo(ray, this, normal, intersection, incoming);
+    }
+
+    public Color Shade(Ray ray, Vector lights, Vector objects, Color bgnd){
+        double px = ray.origin.x + ray.t*ray.direction.x;
+        double py = ray.origin.y + ray.t*ray.direction.y;
+        double pz = ray.origin.z + ray.t*ray.direction.z;
+
+        Vector3d p = new Vector3d(px, py, pz);
+        Vector3d v = new Vector3d(-ray.direction.x, -ray.direction.y, -ray.direction.z);
+        Vector3d n = new Vector3d(px - center.x, py - center.y, pz - center.z);
+        n.normalize();
+
+        return surface.Shade(p, n, v, lights, objects, bgnd);
     }
 
 

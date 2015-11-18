@@ -56,6 +56,11 @@ public class Vector3d {
         return (x*Bx + y*By + z*Bz);
     }
 
+
+    public static double dotProduct(Vector3d A, Vector3d B){
+        return (A.x*B.x + A.y*B.y + A.z*B.z);
+    }
+
     public Vector3d crossProduct(Vector3d B) {
         return new Vector3d(y*B.z - z*B.y, z*B.x - x*B.z, x*B.y - y*B.x);
     }
