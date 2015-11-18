@@ -17,6 +17,6 @@ public abstract class Camera {
     public int height;
     public Point3d location;
     public Vector3d direction;
-    public Color backgroundColor = Color.BLACK;
+    public Color backgroundColor = Color.WHITE;
     public abstract Ray mapPoint(Point2d pixel);
 }

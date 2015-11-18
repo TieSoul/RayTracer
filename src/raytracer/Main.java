@@ -4,6 +4,7 @@ import raytracer.math.Point3d;
 import raytracer.scene.Camera;
 import raytracer.scene.Object3D;
 import raytracer.scene.Scene;
+import raytracer.scene.Surface;
 import raytracer.scene.cameras.OrthographicCamera;
 import raytracer.scene.cameras.PerspectiveCamera;
 import raytracer.scene.objects.Sphere;
@@ -18,9 +19,11 @@ import java.util.ArrayList;
  * Created by Thijs on 04/10/2015.
  */
 public class Main {
+
     public static int IMAGE_WIDTH = 1000;
     public static int IMAGE_HEIGHT = 1000;
     public static double PIXEL_SIZE = 0.01;
+
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         Scene scene = constructScene();
