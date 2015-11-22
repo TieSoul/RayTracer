@@ -1,13 +1,5 @@
 package raytracer.scene;
 
-import raytracer.math.Point3d;
-import raytracer.math.Ray;
-import raytracer.math.Vector3d;
-
-import java.awt.*;
-import java.util.Enumeration;
-import java.util.Vector;
-
 /**
  * Created by Daan on 18-11-15.
  * This class isnt our own but it helps us to show the working of shaders
@@ -15,6 +7,7 @@ import java.util.Vector;
  *
  */
 public class Surface {
+    /*
     public double ir, ig, ib;       //surface color
     public double ka, kd, ks, ns;   //phong model constants
     public double kt, kr, nt;
@@ -118,4 +111,5 @@ public class Surface {
 
         return new Color(r, g, b);
     }
+    */
 }

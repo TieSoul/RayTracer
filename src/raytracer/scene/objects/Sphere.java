@@ -93,8 +93,8 @@ public class Sphere extends Object3D {
         Vector3d v = new Vector3d(-ray.direction.x, -ray.direction.y, -ray.direction.z);
         Vector3d n = new Vector3d(px - center.x, py - center.y, pz - center.z);
         n.normalize();
-
-        return surface.Shade(p, n, v, lights, objects, bgnd);
+        return color;
+        //return surface.Shade(p, n, v, lights, objects, bgnd);
     }
 
 

@@ -11,16 +11,19 @@ import raytracer.scene.Camera;
  */
 public class OrthographicCamera extends Camera {
 
-    public OrthographicCamera(double pixelSize, int width, int height, Point3d location) {
+    public OrthographicCamera(double pixelSize, int width, int height, Point3d location, Point3d lookAt, Vector3d up) {
         this.pixelSize = pixelSize;
         this.width = width;
         this.height = height;
         this.location = location;
+        localZ = new Vector3d(location, lookAt).normalize();
+        localX = up.crossProduct(localZ);
+        localY = localX.crossProduct(localZ);
     }
 
     @Override
     public Ray mapPoint(Point2d pixel) {
-        Point3d origin = new Point3d(pixelSize * (pixel.x - 0.5 * (width-1.0)), pixelSize * (pixel.y - 0.5 * (height - 1.0)), 0);
-        return new Ray(origin, new Vector3d(0, 0, 1));
+        Point3d origin = location.translate(localX.scale(pixelSize * (pixel.x - 0.5 * (width-1.0))).add(localY.scale(pixelSize * (pixel.y - 0.5 * (height - 1.0)))));
+        return new Ray(origin, localZ);
     }
 }

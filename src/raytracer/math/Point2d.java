@@ -9,4 +9,7 @@ public class Point2d {
         this.x = x;
         this.y = y;
     }
+    public Point2d add(Point2d point) {
+        return new Point2d(x + point.x, y + point.y);
+    }
 }

@@ -1,9 +1,10 @@
 package raytracer.math;
 
+import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
+import raytracer.scene.Scene;
 
 import java.awt.*;
-import java.util.Enumeration;
 import java.util.Vector;
 
 public class Ray {
@@ -32,15 +33,15 @@ public class Ray {
         return "Ray: (" + origin.x + ", " + origin.y + ", " + origin.z + ") + t(" + direction.x + ", " + direction.y + ", " + direction.z + ")";
     }
 
-    public boolean trace(Vector objects){
-        Enumeration objList = objects.elements();
-        t = MAX_T;
-        object = null;
-        while (objList.hasMoreElements()){
-            Object3D object = (Object3D) objList.nextElement();
-            object.intersect(this);
+    public IntersectionInfo trace(Scene scene){
+        IntersectionInfo min_intersect = new IntersectionInfo(this, null, null, Double.POSITIVE_INFINITY, false);
+        for (Object3D object : scene.objects) {
+            IntersectionInfo intersect = object.intersect(this);
+            if (intersect.hit && intersect.t < min_intersect.t) {
+                min_intersect = intersect;
+            }
         }
-        return (object != null);
+        return min_intersect;
     }
 
     public Color Shade(Vector lights, Vector objects, Color bgnd){
