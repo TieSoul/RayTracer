@@ -1,11 +1,7 @@
 package raytracer.scene;
 
-import raytracer.math.Point2d;
-import raytracer.math.Point3d;
-import raytracer.math.Ray;
-import raytracer.math.Vector3d;
+import raytracer.math.*;
 
-import java.awt.*;
 
 /**
  * Created by Thijs on 04/10/2015.

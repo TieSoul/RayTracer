@@ -1,9 +1,9 @@
 package raytracer;
 
+import raytracer.math.Color;
 import raytracer.math.Ray;
 import raytracer.scene.Scene;
 
-import java.awt.*;
 
 /**
  * Created by Thijs on 4-11-2015.

@@ -4,9 +4,6 @@ import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
 import raytracer.scene.Scene;
 
-import java.awt.*;
-import java.util.Vector;
-
 public class Ray {
     public static final double MAX_T = Double.MAX_VALUE;
     public Point3d origin;
@@ -35,6 +32,7 @@ public class Ray {
 
     public IntersectionInfo trace(Scene scene){
         IntersectionInfo min_intersect = new IntersectionInfo(this, null, null, Double.POSITIVE_INFINITY, false);
+        min_intersect.hit = false;
         for (Object3D object : scene.objects) {
             IntersectionInfo intersect = object.intersect(this);
             if (intersect.hit && intersect.t < min_intersect.t) {
@@ -42,9 +40,5 @@ public class Ray {
             }
         }
         return min_intersect;
-    }
-
-    public Color Shade(Vector lights, Vector objects, Color bgnd){
-        return object.Shade(this, lights, objects, bgnd);
     }
 }

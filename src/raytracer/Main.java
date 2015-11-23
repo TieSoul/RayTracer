@@ -1,5 +1,6 @@
 package raytracer;
 
+import raytracer.math.Color;
 import raytracer.math.Point3d;
 import raytracer.math.Vector3d;
 import raytracer.samplers.RegularSampler;
@@ -7,12 +8,14 @@ import raytracer.scene.Camera;
 import raytracer.scene.Object3D;
 import raytracer.scene.Scene;
 import raytracer.scene.cameras.PerspectiveCamera;
+import raytracer.scene.lights.AmbientLight;
+import raytracer.scene.lights.DirectionalLight;
+import raytracer.scene.lights.Light;
 import raytracer.scene.objects.Sphere;
-import raytracer.tracers.Raycaster;
+import raytracer.tracers.RayTracer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -45,13 +48,15 @@ public class Main {
     }
     public static Scene constructScene() {
         ArrayList<Object3D> objects = new ArrayList<Object3D>();
-        objects.add(new Sphere(null, new Point3d(0, 0, 2), 1, Color.RED));
-        //objects.add(new Sphere(new Point3d(0, 1, 1.9), 0.75, Color.YELLOW));
-        //objects.add(new Sphere(new Point3d(0, 0.5, 1.7), 0.6, Color.GREEN));
-        objects.add(new Sphere(null, new Point3d(2, 0.5, 1.7), 0.6, Color.GREEN));
-        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(0, 0, 0), 2, new Point3d(0, 0, 2), new Vector3d(0, 1, 0));
-        Tracer tracer = new Raycaster();
-        Scene scene = new Scene(objects, camera, tracer);
+        objects.add(new Sphere(new Point3d(0, 0, 2), 1, Color.RED));
+        objects.add(new Sphere(new Point3d(2, 2, 0), 0.75, Color.YELLOW));
+        objects.add(new Sphere(new Point3d(0, 0.5, 1.7), 0.6, Color.GREEN));
+        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(0, 0, -5), 5, new Point3d(0, 0, 2), new Vector3d(0, 1, 0));
+        Tracer tracer = new RayTracer();
+        ArrayList<Light> lights = new ArrayList<Light>();
+        lights.add(new AmbientLight());
+        lights.add(new DirectionalLight(new Vector3d(-1, -1, 1)));
+        Scene scene = new Scene(objects, lights, camera, tracer);
         scene.sampler = new RegularSampler(16);
         return scene;
     }
