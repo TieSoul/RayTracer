@@ -11,6 +11,7 @@ import raytracer.scene.cameras.PerspectiveCamera;
 import raytracer.scene.lights.AmbientLight;
 import raytracer.scene.lights.DirectionalLight;
 import raytracer.scene.lights.Light;
+import raytracer.scene.lights.PointLight;
 import raytracer.scene.objects.Sphere;
 import raytracer.tracers.RayTracer;
 
@@ -55,7 +56,7 @@ public class Main {
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());
-        lights.add(new DirectionalLight(new Vector3d(-1, -1, 1)));
+        lights.add(new PointLight(new Point3d(.2, .2, .5), .5));
         Scene scene = new Scene(objects, lights, camera, tracer);
         scene.sampler = new RegularSampler(16);
         return scene;

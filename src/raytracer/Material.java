@@ -8,6 +8,7 @@ import raytracer.scene.Scene;
 import raytracer.scene.lights.AmbientLight;
 import raytracer.scene.lights.DirectionalLight;
 import raytracer.scene.lights.Light;
+import raytracer.scene.lights.PointLight;
 
 /**
  * Created by Thijs on 23/11/2015.
@@ -35,7 +36,19 @@ public class Material { // a Phong material; includes Phong shading code.
                 if (cosAngle > 0) {
                     result = result.add(color.mult(light.color).mult(cosAngle * diffuseCoefficient));
                 }
-            } // TODO: Phong specular lighting, point lights.
+            } else if (light instanceof PointLight) {
+                Vector3d lightDirection = new Vector3d(intersect.point, ((PointLight) light).location);
+                Ray shadowRay = new Ray(intersect.point.translate(lightDirection.scale(DELTA)), lightDirection);
+                if (shadowRay.trace(scene).hit)
+                    continue;
+
+                double cosAngle = intersect.normal.dotProduct(lightDirection);
+                if (cosAngle > 0) {
+                    double r = intersect.point.getDistance(((PointLight) light).location);
+                    result = result.add(color.mult(light.color).mult(cosAngle * diffuseCoefficient * Math.pow(((PointLight) light).r / r, 2)));
+                }
+            }
+            // TODO: Phong specular lighting, reflection.
         }
         return result.clamp();
     }
