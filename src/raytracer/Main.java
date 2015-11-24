@@ -11,7 +11,6 @@ import raytracer.scene.cameras.PerspectiveCamera;
 import raytracer.scene.lights.AmbientLight;
 import raytracer.scene.lights.DirectionalLight;
 import raytracer.scene.lights.Light;
-import raytracer.scene.lights.PointLight;
 import raytracer.scene.objects.Sphere;
 import raytracer.tracers.RayTracer;
 
@@ -26,8 +25,8 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    public static int IMAGE_WIDTH = 500;
-    public static int IMAGE_HEIGHT = 500;
+    public static int IMAGE_WIDTH = 750;
+    public static int IMAGE_HEIGHT = 750;
     public static double PIXEL_SIZE = 0.01;
 
     public static void main(String[] args) {
@@ -56,7 +55,7 @@ public class Main {
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());
-        lights.add(new PointLight(new Point3d(.2, .2, .5), .5));
+        lights.add(new DirectionalLight(new Vector3d(-1, -1, 1)));
         Scene scene = new Scene(objects, lights, camera, tracer);
         scene.sampler = new RegularSampler(16);
         return scene;
