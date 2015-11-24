@@ -58,11 +58,14 @@ public class Main {
         objects.add(new Sphere(new Point3d(2, 2, 0), 0.75, Color.YELLOW));
         objects.add(new Sphere(new Point3d(0, 1, 0.5), 0.6, Color.GREEN));
         objects.add(new Plane(new Point3d(0, -2, 0), new Vector3d(0, 1, 0), Color.MAGENTA));
+        for (int i = 0; i < 10; i++) {
+            objects.add(new Sphere(new Point3d(i - 5, -1, 1), 0.5, Color.WHITE));
+        }
         Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(0, 0, -5), 5, new Point3d(0, 0, 3), new Vector3d(0, 1, 0));
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());
-        lights.add(new PointLight(new Point3d(1, 0, 1), 20));
+        lights.add(new PointLight(new Point3d(0, 5, 0.5), 20));
         Scene scene = new Scene(objects, lights, camera, tracer);
         scene.sampler = new RegularSampler(16);
         return scene;
