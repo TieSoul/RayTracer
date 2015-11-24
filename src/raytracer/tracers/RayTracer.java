@@ -16,7 +16,7 @@ public class RayTracer extends Tracer {
     public Color trace_ray(Scene scene, Ray ray) {
         IntersectionInfo intersect = ray.trace(scene);
         if (intersect.t != Double.POSITIVE_INFINITY) {
-            return intersect.object.material.shade(scene, intersect);
+            return intersect.object.material.shade(scene, intersect, 0);
         }
         return null;
     }
