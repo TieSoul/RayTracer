@@ -40,7 +40,7 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         scene.render(image, frame);
-        File outFile = new File("checkerboard_ball.png");
+        File outFile = new File("image.png");
         try {
             ImageIO.write(image, "png", outFile);
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class Main {
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());
-        lights.add(new PointLight(new Point3d(0, 5, 0.5), 20));
+        lights.add(new PointLight(new Point3d(0, 1, 0.5), 20));
         Scene scene = new Scene(objects, lights, camera, tracer);
         scene.sampler = new RegularSampler(16);
         return scene;
