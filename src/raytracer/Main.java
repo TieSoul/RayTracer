@@ -66,7 +66,15 @@ public class Main {
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());
-        lights.add(new PointLight(new Point3d(0, 1, 0.5), 20));
+        Light light1 = new PointLight(new Point3d(0, 0, 5), 10);
+        Light light2 = new PointLight(new Point3d(1, 0, 3), 10);
+        Light light3 = new PointLight(new Point3d(-1, 0, 3), 10);
+        light1.color = Color.RED.mult(0.5);
+        light2.color = Color.GREEN.mult(0.5);
+        light3.color = Color.BLUE.mult(0.5);
+        lights.add(light1);
+        lights.add(light2);
+        lights.add(light3);
         Scene scene = new Scene(objects, lights, camera, tracer);
         scene.sampler = new RegularSampler(16);
         return scene;
