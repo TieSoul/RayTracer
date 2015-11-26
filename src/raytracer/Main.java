@@ -55,11 +55,14 @@ public class Main {
         reflectiveSphere.material.diffuseCoefficient = 0.4;
         reflectiveSphere.material.ambientCoefficient = 0.1;
         objects.add(reflectiveSphere);
-        objects.add(new Sphere(new Point3d(0, 0, 10), 4, Color.BLUE));
         objects.add(new Sphere(new Point3d(2, 2, 0), 0.75, Color.YELLOW));
         Texture planeTexture = new Texture(new File("checkerboard.png"));
         objects.add(new Plane(new Point3d(0, -2, 0), new Vector3d(0, 1, 0), planeTexture));
-        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(0, 0, -5), 5, new Point3d(0, -1, 3), new Vector3d(0, 1, 0));
+        Sphere earth = new Sphere(new Point3d(0, 2, 10), 4, new Texture(new File("earth.jpg")));
+        earth.material.reflectionCoefficient = 0.3;
+        earth.material.specularCoefficient = 0.3;
+        objects.add(earth);
+        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(10, 0, 1), 5, new Point3d(0, -1, 3), new Vector3d(0, 1, 0));
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());

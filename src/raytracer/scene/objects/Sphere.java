@@ -1,6 +1,7 @@
 package raytracer.scene.objects;
 
 import raytracer.Material;
+import raytracer.Texture;
 import raytracer.math.*;
 import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
@@ -26,6 +27,13 @@ public class Sphere extends Object3D {
         this.radius = radius;
         this.sqrRadius = radius * radius;
         this.material = new Material(color);
+    }
+
+    public Sphere(Point3d center, double radius, Texture texture) {
+        this.center = center;
+        this.radius = radius;
+        this.sqrRadius = radius * radius;
+        this.material = new Material(texture);
     }
 
     //check if the ray intersects the spere
@@ -79,6 +87,12 @@ public class Sphere extends Object3D {
 
     @Override
     public Point2d getTexturePoint(Point3d point) {
-        return new Point2d(0, 0);
+        Vector3d hit = new Vector3d(center, point).normalize();
+        double latitude = Math.acos(hit.dotProduct(new Vector3d(0, 1, 0))) / Math.PI; // latitude in [0, pi] (scaled down to [0, 1])
+        double longitude = Math.acos(hit.dotProduct(new Vector3d(0, 0, 1)) / Math.sin(latitude * Math.PI)) / (2*Math.PI); // longitude in [0, pi] (scaled down to [0, 0.5])
+        if (hit.dotProduct(new Vector3d(0, 1, 0).crossProduct(new Vector3d(0, 0, 1))) > 0) {
+            longitude = 1 - longitude; // turn the longitude into the range [0, 1] by 'mirroring' the longitudes on one side of the sphere around 0.5
+        }
+        return new Point2d(longitude, latitude);
     }
 }
