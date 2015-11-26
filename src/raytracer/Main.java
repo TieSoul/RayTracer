@@ -26,9 +26,9 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    public static int IMAGE_WIDTH = 500;
-    public static int IMAGE_HEIGHT = 500;
-    public static double PIXEL_SIZE = 0.01;
+    public static int IMAGE_WIDTH = 1000;
+    public static int IMAGE_HEIGHT = 1000;
+    public static double PIXEL_SIZE = 0.005;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -40,7 +40,7 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         scene.render(image, frame);
-        File outFile = new File("image.png");
+        File outFile = new File("checkerboard_ball.png");
         try {
             ImageIO.write(image, "png", outFile);
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class Main {
     }
     public static Scene constructScene() {
         ArrayList<Object3D> objects = new ArrayList<Object3D>();
-        Sphere reflectiveSphere = new Sphere(new Point3d(0, 0, 2), 1);
+        Sphere reflectiveSphere = new Sphere(new Point3d(0, -1, 3), 1);
         reflectiveSphere.material.reflectionCoefficient = 1.0;
         reflectiveSphere.material.specularCoefficient = 1.0;
         reflectiveSphere.material.diffuseCoefficient = 0.4;
@@ -57,12 +57,9 @@ public class Main {
         objects.add(reflectiveSphere);
         objects.add(new Sphere(new Point3d(0, 0, 10), 4, Color.BLUE));
         objects.add(new Sphere(new Point3d(2, 2, 0), 0.75, Color.YELLOW));
-        objects.add(new Sphere(new Point3d(0, 1, 0.5), 0.6, Color.GREEN));
-        objects.add(new Plane(new Point3d(0, -2, 0), new Vector3d(0, 1, 0), Color.MAGENTA));
-        for (int i = 0; i < 10; i++) {
-            objects.add(new Sphere(new Point3d(i - 5, -1, 1), 0.5, Color.WHITE));
-        }
-        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(0, 0, -5), 5, new Point3d(0, 0, 3), new Vector3d(0, 1, 0));
+        Texture planeTexture = new Texture(new File("checkerboard.png"));
+        objects.add(new Plane(new Point3d(0, -2, 0), new Vector3d(0, 1, 0), planeTexture));
+        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(0, 0, -5), 5, new Point3d(0, -1, 3), new Vector3d(0, 1, 0));
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());

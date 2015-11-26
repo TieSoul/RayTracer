@@ -1,6 +1,8 @@
 package raytracer.scene;
 
 import raytracer.Material;
+import raytracer.math.Point2d;
+import raytracer.math.Point3d;
 import raytracer.math.Ray;
 
 /**
@@ -9,5 +11,5 @@ import raytracer.math.Ray;
 public abstract class Object3D {
     public abstract IntersectionInfo intersect(Ray ray);
     public Material material;
-
+    public abstract Point2d getTexturePoint(Point3d point);
 }

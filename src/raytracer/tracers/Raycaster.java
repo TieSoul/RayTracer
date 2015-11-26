@@ -15,7 +15,7 @@ public class Raycaster extends Tracer {
     @Override
     public Color trace_ray(Scene scene, Ray ray) {
         IntersectionInfo intersect = ray.trace(scene);
-        if (intersect.t != Double.POSITIVE_INFINITY) return intersect.object.material.color;
+        if (intersect.t != Double.POSITIVE_INFINITY) return intersect.object.material.getColor(intersect);
         return null;
     }
 }

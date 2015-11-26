@@ -7,6 +7,11 @@ public class Color {
     public double red;
     public double green;
     public double blue;
+    public Color(int rgb) {
+        red = ((rgb >> 16) & 0xFF)/255.0;
+        green = ((rgb >> 8) & 0xFF)/255.0;
+        blue = (rgb & 0xFF)/255.0;
+    }
     public Color(double red, double green, double blue) {
         this.red = red;
         this.green = green;

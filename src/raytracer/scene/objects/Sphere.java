@@ -1,10 +1,7 @@
 package raytracer.scene.objects;
 
 import raytracer.Material;
-import raytracer.math.Color;
-import raytracer.math.Point3d;
-import raytracer.math.Ray;
-import raytracer.math.Vector3d;
+import raytracer.math.*;
 import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
 
@@ -78,5 +75,10 @@ public class Sphere extends Object3D {
         }
 
         return new IntersectionInfo(ray, this, normal, intersection, incoming);
+    }
+
+    @Override
+    public Point2d getTexturePoint(Point3d point) {
+        return new Point2d(0, 0);
     }
 }

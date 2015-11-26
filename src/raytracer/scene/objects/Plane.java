@@ -1,10 +1,8 @@
 package raytracer.scene.objects;
 
 import raytracer.Material;
-import raytracer.math.Color;
-import raytracer.math.Point3d;
-import raytracer.math.Ray;
-import raytracer.math.Vector3d;
+import raytracer.Texture;
+import raytracer.math.*;
 import raytracer.scene.IntersectionInfo;
 import raytracer.scene.Object3D;
 
@@ -27,6 +25,12 @@ public class Plane extends Object3D {
         material = new Material(color);
     }
 
+    public Plane(Point3d point, Vector3d normal, Texture texture) {
+        this.point = point;
+        this.normal = normal;
+        material = new Material(texture);
+    }
+
     @Override
     public IntersectionInfo intersect(Ray ray) {
         double t = new Vector3d(point).subtract(new Vector3d(ray.origin)).dotProduct(normal) / ray.direction.dotProduct(normal);
@@ -37,5 +41,22 @@ public class Plane extends Object3D {
             return new IntersectionInfo(ray, this, intersectVec, intersection, true);
         }
         return new IntersectionInfo(ray, this);
+    }
+
+    @Override
+    public Point2d getTexturePoint(Point3d point) {
+        Vector3d localZ = normal;
+        Vector3d helpVector = new Vector3d(1, 0, 0);
+        if (normal.x == helpVector.x) helpVector = new Vector3d(0, 1, 0);
+        Vector3d localY = helpVector.crossProduct(localZ);
+        Vector3d localX = localZ.crossProduct(localY);
+        double xComponent = localX.dotProduct(new Vector3d(point).subtract(new Vector3d(this.point)));
+        double yComponent = localY.dotProduct(new Vector3d(point).subtract(new Vector3d(this.point)));
+
+        xComponent = (xComponent % material.textureSize) / material.textureSize;
+        yComponent = (yComponent % material.textureSize) / material.textureSize;
+        if (xComponent < 0) xComponent = 1 + xComponent;
+        if (yComponent < 0) yComponent = 1 + yComponent;
+        return new Point2d(xComponent, yComponent);
     }
 }
