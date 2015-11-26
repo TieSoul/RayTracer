@@ -38,6 +38,10 @@ public class Material { // a Phong material; includes Phong shading code.
                 double cosAngle = intersect.normal.dotProduct(lightDirection);
                 if (cosAngle > 0) {
                     result = result.add(color.mult(light.color).mult(cosAngle * diffuseCoefficient));
+                    if (specularCoefficient > 0) {
+                        Vector3d r = lightDirection.scale(-1).add(intersect.normal.scale(2*cosAngle));
+                        result = result.add(color.mult(light.color).mult(intersect.ray.direction.scale(-1).dotProduct(r) * specularCoefficient));
+                    }
                 }
             } else if (light instanceof PointLight) {
                 Vector3d lightDirection = new Vector3d(intersect.point, ((PointLight) light).location).normalize();
@@ -51,6 +55,10 @@ public class Material { // a Phong material; includes Phong shading code.
                 if (cosAngle > 0) {
                     double r = intersect.point.getDistance(((PointLight) light).location);
                     result = result.add(color.mult(light.color).mult(cosAngle * diffuseCoefficient * Math.max(0, (1 - Math.pow(r / ((PointLight) light).r, 2)))));
+                }
+                if (specularCoefficient > 0) {
+                    Vector3d r = lightDirection.scale(-1).add(intersect.normal.scale(2*intersect.normal.dotProduct(lightDirection)));
+                    result = result.add(color.mult(light.color).mult(intersect.ray.direction.scale(-1).dotProduct(r) * specularCoefficient));
                 }
             }
             // TODO: Phong specular lighting.

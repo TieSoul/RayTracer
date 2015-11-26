@@ -51,6 +51,7 @@ public class Main {
         ArrayList<Object3D> objects = new ArrayList<Object3D>();
         Sphere reflectiveSphere = new Sphere(new Point3d(0, 0, 2), 1);
         reflectiveSphere.material.reflectionCoefficient = 1.0;
+        reflectiveSphere.material.specularCoefficient = 1.0;
         reflectiveSphere.material.diffuseCoefficient = 0.4;
         reflectiveSphere.material.ambientCoefficient = 0.1;
         objects.add(reflectiveSphere);

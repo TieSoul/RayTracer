@@ -32,7 +32,9 @@ public class Plane extends Object3D {
         double t = new Vector3d(point).subtract(new Vector3d(ray.origin)).dotProduct(normal) / ray.direction.dotProduct(normal);
         if (t > 0.0001) {
             Point3d intersection = ray.getEnd(t);
-            return new IntersectionInfo(ray, this, normal, intersection, true);
+            Vector3d intersectVec = normal;
+            if (normal.dotProduct(ray.direction.scale(-1)) < 0) intersectVec = normal.scale(-1);
+            return new IntersectionInfo(ray, this, intersectVec, intersection, true);
         }
         return new IntersectionInfo(ray, this);
     }
