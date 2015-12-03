@@ -1,6 +1,5 @@
 package raytracer;
 
-import raytracer.math.Color;
 import raytracer.math.Point3d;
 import raytracer.math.Vector3d;
 import raytracer.samplers.RegularSampler;
@@ -49,32 +48,29 @@ public class Main {
     }
     public static Scene constructScene() {
         ArrayList<Object3D> objects = new ArrayList<Object3D>();
-        Sphere reflectiveSphere = new Sphere(new Point3d(0, -1, 3), 1);
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 10; y++) {
+                Sphere reflectiveSphere = new Sphere(new Point3d(2*x - 10, -1, 2 * y - 10), 1);
+                reflectiveSphere.material.reflectionCoefficient = 1.0;
+                reflectiveSphere.material.specularCoefficient = 1.0;
+                reflectiveSphere.material.diffuseCoefficient = 0.4;
+                reflectiveSphere.material.ambientCoefficient = 0.0;
+                objects.add(reflectiveSphere);
+            }
+        }
+        Sphere reflectiveSphere = new Sphere(new Point3d(0, 2, 0), 1);
         reflectiveSphere.material.reflectionCoefficient = 1.0;
         reflectiveSphere.material.specularCoefficient = 1.0;
         reflectiveSphere.material.diffuseCoefficient = 0.4;
-        reflectiveSphere.material.ambientCoefficient = 0.1;
+        reflectiveSphere.material.ambientCoefficient = 0.0;
         objects.add(reflectiveSphere);
-        objects.add(new Sphere(new Point3d(2, 2, 0), 0.75, Color.YELLOW));
         Texture planeTexture = new Texture(new File("checkerboard.png"));
         objects.add(new Plane(new Point3d(0, -2, 0), new Vector3d(0, 1, 0), planeTexture));
-        Sphere earth = new Sphere(new Point3d(0, 2, 10), 4, new Texture(new File("earth.jpg")));
-        earth.material.reflectionCoefficient = 0.3;
-        earth.material.specularCoefficient = 0.3;
-        objects.add(earth);
-        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(10, 0, 1), 5, new Point3d(0, -1, 3), new Vector3d(0, 1, 0));
+        Camera camera = new PerspectiveCamera(PIXEL_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, new Point3d(10, 5, -1), 5, new Point3d(0, 0, 0), new Vector3d(0, 1, 0));
         Tracer tracer = new RayTracer();
         ArrayList<Light> lights = new ArrayList<Light>();
         lights.add(new AmbientLight());
-        Light light1 = new PointLight(new Point3d(0, 0, 5), 10);
-        Light light2 = new PointLight(new Point3d(1, 0, 3), 10);
-        Light light3 = new PointLight(new Point3d(-1, 0, 3), 10);
-        light1.color = Color.RED.mult(0.5);
-        light2.color = Color.GREEN.mult(0.5);
-        light3.color = Color.BLUE.mult(0.5);
-        lights.add(light1);
-        lights.add(light2);
-        lights.add(light3);
+        lights.add(new PointLight(new Point3d(0, 5, 0), 20));
         Scene scene = new Scene(objects, lights, camera, tracer);
         scene.sampler = new RegularSampler(16);
         return scene;
