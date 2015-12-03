@@ -36,11 +36,10 @@ public class Sphere extends Object3D {
         this.material = new Material(texture);
     }
 
-    //check if the ray intersects the spere
+    //check if the ray intersects the sphere
     @Override
-    //actually needs to return a double
+
     public IntersectionInfo intersect(Ray ray) {
-        //method missing
 
         Point3d p = ray.origin;
         Vector3d u = ray.direction;

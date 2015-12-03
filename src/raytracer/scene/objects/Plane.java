@@ -16,19 +16,19 @@ public class Plane extends Object3D {
     public Plane(Point3d point, Vector3d normal) {
         this.point = point;
         this.normal = normal;
-        material = new Material(Color.WHITE);
+        this.material = new Material(Color.WHITE);
     }
 
     public Plane(Point3d point, Vector3d normal, Color color) {
         this.point = point;
         this.normal = normal;
-        material = new Material(color);
+        this.material = new Material(color);
     }
 
     public Plane(Point3d point, Vector3d normal, Texture texture) {
         this.point = point;
         this.normal = normal;
-        material = new Material(texture);
+        this.material = new Material(texture);
     }
 
     @Override

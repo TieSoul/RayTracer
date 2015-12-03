@@ -49,4 +49,5 @@ public class Color {
     public static final Color MAGENTA = new Color(1.0, 0, 1.0);
     public static final Color YELLOW = new Color(1.0, 1.0, 0);
     public static final Color CYAN = new Color(0, 1.0, 1.0);
+    public static final Color SILVER = new Color(0.753,0.753,0.753);
 }
